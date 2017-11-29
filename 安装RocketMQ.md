@@ -43,3 +43,14 @@ Send shutdown request to mqbroker(7679) OK
 The mqnamesrv(7638) is running...
 Send shutdown request to mqnamesrv(7638) OK
 ```
+
+# 开启端口
+```
+# firewall-cmd --zone=public --add-port=9876/tcp --permanent
+
+# firewall-cmd --zone=public --add-port=10911/tcp --permanent
+
+# firewall-cmd --zone=public --add-port=10909/tcp --permanent
+
+# firewall-cmd --reload
+```
