@@ -22,11 +22,15 @@ http://rocketmq.apache.org/docs/quick-start/
 The Name Server boot success. serializeType=JSON
 ```
 
-# 启动Broker
+# JVM参数配置
 ```
 # vim bin/runbroker.sh
 JAVA_OPT="${JAVA_OPT} -server -Xms1g -Xmx1g -Xmn512m"
+```
+    根据实际的内存大小自定义
 
+# 启动Broker
+```
 # nohup sh bin/mqbroker -n localhost:9876 &
 
 # cat ~/logs/rocketmqlogs/broker.log
