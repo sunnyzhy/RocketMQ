@@ -14,6 +14,13 @@ http://rocketmq.apache.org/docs/quick-start/
 # cd distribution/target/apache-rocketmq
 ```
 
+# Name Server的JVM参数配置
+```
+# vim bin/runserver.sh
+JAVA_OPT="${JAVA_OPT} -server -Xms1g -Xmx1g -Xmn512m -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=320m"
+```
+    根据实际的内存大小自定义
+
 # 启动Name Server
 ```
 # nohup sh bin/mqnamesrv &
@@ -22,7 +29,7 @@ http://rocketmq.apache.org/docs/quick-start/
 The Name Server boot success. serializeType=JSON
 ```
 
-# JVM参数配置
+# Broker的JVM参数配置
 ```
 # vim bin/runbroker.sh
 JAVA_OPT="${JAVA_OPT} -server -Xms1g -Xmx1g -Xmn512m"
