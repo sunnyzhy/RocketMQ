@@ -20,7 +20,7 @@ rocketmq.config.namesrvAddr=localhost:9876
 ```
 # cd target
 
-# java -jar rocketmq-console-ng-1.0.0.jar
+# java -jar -Xms64M -Xmx128M -Xmn20M rocketmq-console-ng-1.0.0.jar
 ```
 
 # 浏览器访问
