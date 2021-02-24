@@ -1,12 +1,12 @@
 # 知识点
 ## 一、消息的消费状态
-1. NOT_ONLINE: 订阅端不在线
+1. **NOT_ONLINE: 订阅端不在线**
 
-2. CONSUMED: 消息已经被消费
+2. **CONSUMED: 消息已经被消费**
 
    订阅端返回 SUCCESS、ReconsumerLater、NULL，或者抛出异常，消息都会走重试流程，消息的消费状态都是 CONSUMED。
 
-3. CONSUMED_BUT_FILTERED: 消息已经被消费，但是被忽略掉了
+3. **CONSUMED_BUT_FILTERED: 消息已经被消费，但是被忽略掉了**
 
    ![rocketmq-01.png](./images/rocketmq-01.png 'rocketmq-01.png')
    
@@ -18,6 +18,6 @@
    
    ![rocketmq-02.png](./images/rocketmq-02.png 'rocketmq-02.png')
 
-4. NOT_CONSUME_YET: 消息未被消费
+4. **NOT_CONSUME_YET: 消息未被消费**
 
    有可能消息发生了堆积，还未被消费；也有可能消费线程 hang 住了，导致消费线程迟迟没有返回。
