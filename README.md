@@ -14,7 +14,7 @@
    
    原因：消息的分配是由 Broker 决定的，而不是 Consumer；在集群模式消费中，消费者组的名称又是相同的情况下，Broker 会负载均衡地把消息分配到各个节点去消费，所以只有一部分消息被分配给了 Consumer1，而另一部分消息则被分配到给了 Consumer2，但是 Consumer2 订阅的是 tag2，所以不会有任何输出，相当于被 Consumer2 忽略掉了。
    
-   **解决这个问题的关键就是：针对不同的 Tag ，Consumer 要配置不同的 Group。**
+   **解决这个问题的关键就是：针对不同的 Tag ，集群里的 Consumer 要配置不同的 Group。**
    
    ![rocketmq-02.png](./images/rocketmq-02.png 'rocketmq-02.png')
 
