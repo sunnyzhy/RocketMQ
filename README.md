@@ -1,49 +1,23 @@
-# windows（单机）
-## 修改 store 路径
-### 一、复制 broker.properties
-```
->cd conf
+# 知识点
+## 一、消息的消费状态
+1. NOT_ONLINE: 订阅端不在线
 
->copy 2m-noslave\broker-a.properties broker.properties
-```
+2. CONSUMED: 消息已经被消费
 
-### 二、在 broker.properties 里添加以下配置信息
-```
-diskMaxUsedSpaceRatio=90
-storePathRootDir=F:\\rocketmq\\store
-storePathCommitLog=F:\\rocketmq\\store\\commitLog
-```
+   订阅端返回 SUCCESS、ReconsumerLater、NULL，或者抛出异常，消息都会走重试流程，消息的消费状态都是 CONSUMED。
 
-## 三、启动 broker
-```
->cd bin
+3. CONSUMED_BUT_FILTERED: 消息已经被消费，但是被忽略掉了
 
->start mqbroker.exe -n 127.0.0.1:9876  -c ../conf/broker.properties
-```
+   ![rocketmq-01.png](./images/rocketmq-01.png 'rocketmq-01.png')
+   
+   如上图所示，在集群模式下，使用不同的 Consumer （消费者组的名称都是 group1）消费相同 Topic 但不同 Tag 的消息， 最终，Consumer1 却只消费了一部分消息。查看消息的消费状态，发现未被 Consumer1 消费的消息状态都为 CONSUMED_BUT_FILTERED，为什么会出现这种情况？
+   
+   原因：消息的分配是由 Broker 决定的，而不是 Consumer；在集群模式消费中，消费者组的名称又是相同的情况下，Broker 会负载均衡地把消息分配到各个节点去消费，所以只有一部分消息被分配给了 Consumer1，而另一部分消息则被分配到给了 Consumer2，但是 Consumer2 订阅的是 tag2，所以不会有任何输出，相当于被 Consumer2 忽略掉了。
+   
+   **解决这个问题的关键就是：针对不同的 Tag ，Consumer 要配置不同的 Group。**
+   
+   ![rocketmq-02.png](./images/rocketmq-02.png 'rocketmq-02.png')
 
-## 修改 logs 路径
-修改 logback_broker.xml、logback_filtersrv.xml、logback_namesrv.xml、logback_tools.xml 的方法都相同。
+4. NOT_CONSUME_YET: 消息未被消费
 
-### 一、打开 conf 目录
-```
->cd conf
-```
-
-### 二、在 xml 配置文件里添加 property 节点
-```xml
-<configuration>
-	<property name="LogPath" value="F:\\rocketmq"></property>
-  <appender ...
-```
-
-### 三、把 ${user.home} 替换为 ${LogPath}
-
-### 四、启动namesrv
-```
->start mqnamesrv.exe
-```
-
-### 五、启动 broker
-```
->start mqbroker.exe -n 127.0.0.1:9876  -c ../conf/broker.properties
-```
+   有可能消息发生了堆积，还未被消费；也有可能消费线程 hang 住了，导致消费线程迟迟没有返回。
