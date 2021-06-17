@@ -97,7 +97,7 @@ flushDiskType=ASYNC_FLUSH
 
 ## 启动集群服务
 
-***一定要先启动 nameserver，再启 broker。***
+***一定要先启动 nameserver，再启动 broker。***
 
 ### 启动 192.168.0.10 的 nameserver
 ```bash
