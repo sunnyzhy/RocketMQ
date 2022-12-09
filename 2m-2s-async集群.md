@@ -50,7 +50,7 @@ flushDiskType=ASYNC_FLUSH
 
 # vim broker-a-s.properties
 brokerClusterName=rocketmq-cluster
-brokerName=broker-a
+brokerName=broker-a-s
 brokerId=1
 namesrvAddr=192.168.0.10:9876;192.168.0.20:9876
 deleteWhen=04
@@ -84,7 +84,7 @@ flushDiskType=ASYNC_FLUSH
 
 # vim broker-b-s.properties
 brokerClusterName=rocketmq-cluster
-brokerName=broker-b
+brokerName=broker-b-s
 brokerId=1
 namesrvAddr=192.168.0.10:9876;192.168.0.20:9876
 deleteWhen=04
