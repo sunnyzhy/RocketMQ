@@ -42,6 +42,10 @@ storePathRootDir=/usr/local/data/store
 storePathCommitLog=/usr/local/data/store/commitlog
 brokerRole=ASYNC_MASTER
 flushDiskType=ASYNC_FLUSH
+waitTimeMillsInSendQueue=10000
+sendMessageThreadPoolNums=16
+useReentrantLockWhenPutMessage=true
+brokerIP1=192.168.0.10
 ```
 
 ### 修改 192.168.0.11 的 broker-a-s.properties
@@ -59,6 +63,10 @@ storePathRootDir=/usr/local/data/store
 storePathCommitLog=/usr/local/data/store/commitlog
 brokerRole=SLAVE
 flushDiskType=ASYNC_FLUSH
+waitTimeMillsInSendQueue=10000
+sendMessageThreadPoolNums=16
+useReentrantLockWhenPutMessage=true
+brokerIP1=192.168.0.11
 ```
 
 ### 修改 192.168.0.20 的 broker-b.properties
@@ -76,6 +84,10 @@ storePathRootDir=/usr/local/data/store
 storePathCommitLog=/usr/local/data/store/commitlog
 brokerRole=ASYNC_MASTER
 flushDiskType=ASYNC_FLUSH
+waitTimeMillsInSendQueue=10000
+sendMessageThreadPoolNums=16
+useReentrantLockWhenPutMessage=true
+brokerIP1=192.168.0.20
 ```
 
 ### 修改 192.168.0.21 的 broker-b-s.properties
@@ -93,6 +105,10 @@ storePathRootDir=/usr/local/data/store
 storePathCommitLog=/usr/local/data/store/commitlog
 brokerRole=SLAVE
 flushDiskType=ASYNC_FLUSH
+waitTimeMillsInSendQueue=10000
+sendMessageThreadPoolNums=16
+useReentrantLockWhenPutMessage=true
+brokerIP1=192.168.0.21
 ```
 
 ## 启动集群服务
