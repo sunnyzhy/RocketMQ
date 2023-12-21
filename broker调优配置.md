@@ -81,6 +81,8 @@ ProcessQueue 保存的消息大小超过阈值，默认 100M，可以配置 pull
 
 ## broker 调优配置
 
+***最优的方法是扩容 Broker 集群。***
+
 broker 调优配置 ```broker.conf``` 或 ```broker-x.properties```:
 
 ```conf
